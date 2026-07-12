@@ -5,11 +5,12 @@ This is the operational playbook for getting the site live today and keeping it 
 ## Current status (as of 2026-07-11)
 
 - **Git-linked deploy is live.** Repo: `github.com/justkeeplivin4805/Livininc.com` (public, Netlify app installed with access scoped to this repo only). Netlify site `livin-equipment-sourcing` is linked to `main` — any push to `main` auto-deploys in ~30 seconds. Phase 1 (manual drag-and-drop) is retired; Phase 2 below is now the live workflow.
-- **Custom domain added, DNS pending.** `livininc.com` and `www.livininc.com` were added in Netlify (Domain management), status "Pending DNS verification" as of this writing. Netlify does not manage this zone — DNS stays at Namecheap alongside the existing ImprovMX (MX/TXT) and Brevo records for email. Records still needed at Namecheap Advanced DNS for `livininc.com`:
+- **Custom domain added, DNS live.** `livininc.com` and `www.livininc.com` are added in Netlify (Domain management). DNS records added at Namecheap Advanced DNS on 2026-07-11:
   - `A` record, host `@`, value `75.2.60.5`
   - `CNAME` record, host `www`, value `livin-equipment-sourcing.netlify.app`
-  - Do not touch the existing MX, SPF, or Brevo-verification records — those run email (ImprovMX forwarding + Brevo SMTP send-as for `matt@livininc.com`) and are unrelated to the website.
-  - Netlify auto-issues a free Let's Encrypt certificate once DNS resolves; can take up to ~48 hours to fully propagate.
+  - Two default Namecheap records had to be deleted first because they conflicted on the same hosts: a `CNAME www → parkingpage.namecheap.com` and a `URL Redirect Record @ → http://www.livininc.com/`.
+  - Confirmed resolving at the authoritative nameserver (`dns1.registrar-servers.com`) as of 2026-07-11. Netlify's SSL panel shows "Waiting on DNS propagation" — the free Let's Encrypt certificate auto-issues once that clears, usually well under the 48-hour outside estimate.
+  - Email records (MX → ImprovMX, Brevo DKIM CNAMEs, SPF/DMARC TXT) were left untouched and are unaffected.
 - **Real contact email is live on the site.** `matt@livininc.com` (Brevo SMTP send-as, forwards via ImprovMX) replaced the `livin4069@gmail.com` placeholder in the contact section and footer.
 - **Formspree contact form is untouched** — still posts to `xdaboodj`, already activated and delivering to `livin4069@gmail.com`. Left as-is to avoid breaking a working integration; revisit if you want form replies routed to the new domain email instead.
 
