@@ -7,29 +7,35 @@
 <title>LiViN, Inc. — Precision Procurement. Spec-Matched. Sourced.</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
 <style>
   :root {
-    --bg: #0a0e14;
-    --bg-elev: #11161f;
-    --bg-elev-2: #161c27;
-    --line: #1e2633;
-    --line-strong: #2a3344;
-    --text: #e6ebf2;
-    --text-dim: #9aa4b3;
-    --text-faint: #5d6675;
-    --accent: #c9a961;        /* matte gold/amber */
-    --accent-bright: #e6c47a;
-    --accent-dim: #8a7440;
-    --accent-blue: #4a90b8;   /* steel blue secondary */
+    /* LiViN Unified Brand — tokens.css v1.0, Jul 2026 */
+    --bg: #0A0E14;             /* navy base */
+    --bg-elev: #0D121B;        /* navy raised */
+    --bg-elev-2: #11161F;      /* navy card */
+    --line: rgba(232,226,212,.08);
+    --line-strong: rgba(232,226,212,.16);
+    --line-gold: rgba(201,169,97,.25);
+    --text: #E8E2D4;           /* bone */
+    --text-dim: rgba(232,226,212,.55);
+    --text-faint: rgba(232,226,212,.40);
+    --accent: #C9A961;         /* gold */
+    --accent-bright: #e2c07f;
+    --accent-dim: #8A6F38;     /* gold deep */
+    --accent-blue: #4A90B8;    /* steel */
+    --spark-from: #E9A85C;
+    --spark-to: #E2694F;
+    --spark: linear-gradient(135deg, #E9A85C, #E2694F);
     --danger: #c46a5a;
+    --r-sm: 6px; --r-md: 10px; --r-lg: 14px;
     --max-width: 1200px;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; }
   body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
     background: var(--bg);
     color: var(--text);
     line-height: 1.6;
@@ -37,6 +43,7 @@
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
   }
+  ::selection { background: rgba(226,105,79,0.30); color: #fff; }
 
   /* ----- Layout helpers ----- */
   .container { max-width: var(--max-width); margin: 0 auto; padding: 0 32px; }
@@ -65,8 +72,8 @@
     background: var(--accent);
   }
 
-  h1, h2, h3, h4 { font-weight: 700; letter-spacing: -0.02em; line-height: 1.15; }
-  h1 { font-size: clamp(40px, 6vw, 72px); font-weight: 800; }
+  h1, h2, h3, h4 { font-weight: 600; letter-spacing: -0.02em; line-height: 1.15; }
+  h1 { font-size: clamp(40px, 6vw, 64px); font-weight: 600; }
   h2 { font-size: clamp(32px, 4vw, 48px); margin-bottom: 24px; }
   h3 { font-size: 22px; margin-bottom: 12px; }
   p { color: var(--text-dim); font-size: 17px; }
@@ -85,6 +92,10 @@
     -webkit-backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--line);
   }
+  nav .rule {
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent) 0%, var(--accent) 82%, var(--spark-to) 100%);
+  }
   nav .inner {
     max-width: var(--max-width);
     margin: 0 auto;
@@ -94,27 +105,30 @@
     justify-content: space-between;
   }
   .logo {
-    font-family: 'Inter', sans-serif;
-    font-weight: 800;
-    font-size: 20px;
-    letter-spacing: 0.04em;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 22px;
+    letter-spacing: -0.02em;
     color: var(--text);
-    display: flex;
+    display: inline-flex;
     align-items: center;
-    gap: 10px;
   }
-  .logo-mark {
-    width: 28px; height: 28px;
-    border: 1.5px solid var(--accent);
-    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dim) 100%);
-    transform: rotate(45deg);
+  /* diamond mark framing the V — LiViN unified brand wordmark */
+  .logo .v {
     position: relative;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 0.30em;
+    color: var(--accent);
   }
-  .logo-mark::after {
+  .logo .v::before {
+    /* pure gold at UI sizes — heat is reserved for the header rule + large display mark */
     content: '';
     position: absolute;
-    inset: 4px;
-    background: var(--bg);
+    width: 0.9em; height: 0.9em;
+    transform: rotate(45deg);
+    border: 1.6px solid var(--accent);
   }
   .logo span { color: var(--accent); }
   .nav-links { display: flex; gap: 36px; align-items: center; }
@@ -126,9 +140,9 @@
   .nav-links a:hover { color: var(--text); }
   .nav-cta {
     padding: 10px 20px;
-    border: 1px solid var(--accent);
+    border: 1px solid rgba(201,169,97,.5);
     color: var(--accent) !important;
-    border-radius: 2px;
+    border-radius: var(--r-sm);
     transition: all 0.2s;
     font-size: 13px !important;
     text-transform: uppercase;
@@ -204,14 +218,13 @@
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    padding: 16px 28px;
-    font-size: 14px;
+    padding: 15px 26px;
+    font-size: 13px;
     font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    border-radius: 2px;
+    letter-spacing: 0.02em;
+    border-radius: var(--r-sm);
     cursor: pointer;
-    transition: all 0.2s;
+    transition: all 0.15s ease;
     border: 1px solid transparent;
     font-family: inherit;
   }
@@ -226,10 +239,12 @@
   }
   .btn-secondary {
     background: transparent;
-    color: var(--text);
-    border-color: var(--line-strong);
+    color: var(--accent);
+    font-weight: 500;
+    border-color: rgba(201,169,97,.5);
   }
   .btn-secondary:hover {
+    background: rgba(201,169,97,.10);
     border-color: var(--accent);
     color: var(--accent) !important;
   }
@@ -244,7 +259,7 @@
     background: linear-gradient(180deg, var(--bg-elev) 0%, var(--bg-elev-2) 100%);
     border: 1px solid var(--line-strong);
     padding: 32px;
-    border-radius: 4px;
+    border-radius: var(--r-md);
     position: relative;
     box-shadow: 0 30px 60px -20px rgba(0,0,0,0.5);
   }
@@ -391,7 +406,7 @@
     background: var(--bg);
     border: 1px solid var(--line-strong);
     padding: 32px 24px;
-    border-radius: 2px;
+    border-radius: var(--r-sm);
     transition: all 0.3s;
     position: relative;
     overflow: hidden;
@@ -599,7 +614,7 @@
     background: var(--bg-elev);
     border: 1px solid var(--line-strong);
     padding: 40px;
-    border-radius: 2px;
+    border-radius: var(--r-sm);
   }
   .form-row {
     display: grid;
@@ -627,7 +642,7 @@
     padding: 14px 16px;
     background: var(--bg);
     border: 1px solid var(--line-strong);
-    border-radius: 2px;
+    border-radius: var(--r-sm);
     color: var(--text);
     font-family: inherit;
     font-size: 15px;
@@ -731,7 +746,7 @@
     border: 1px solid var(--line-strong);
     border-left: 3px solid var(--accent-blue);
     padding: 48px;
-    border-radius: 2px;
+    border-radius: var(--r-sm);
     position: relative;
     overflow: hidden;
   }
@@ -787,10 +802,10 @@
 
 <!-- ===================== NAV ===================== -->
 <nav>
+  <div class="rule"></div>
   <div class="inner">
     <a href="#top" class="logo">
-      <span class="logo-mark"></span>
-      Li<span>Vi</span>N
+      Li<span class="v">V</span>iN
     </a>
     <div class="nav-links">
       <a href="#capabilities">Capabilities</a>
@@ -1294,8 +1309,7 @@
     <div class="footer-grid">
       <div class="footer-brand">
         <div class="logo">
-          <span class="logo-mark"></span>
-          Li<span style="color: var(--accent);">Vi</span>N
+          Li<span class="v">V</span>iN
         </div>
         <p>LiViN, Inc. — Precision procurement for operators who hold a higher standard. Equipment-agnostic.
           Spec-matched. Sourced.</p>
